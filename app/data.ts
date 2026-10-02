@@ -1,0 +1,77 @@
+export type Topic = { id: string; title: string; english: string; stage: 1|2|3; area: string; skills: string[]; pitfall: string; refs: string[]; prerequisite?: string };
+const t = (id:string,title:string,english:string,stage:1|2|3,area:string,skills:string[],pitfall:string,refs:string[],prerequisite?:string):Topic => ({id,title,english,stage,area,skills,pitfall,refs,prerequisite});
+export const topics: Topic[] = [
+ t('indices','指數律','Laws of indices',1,'代數',['乘、除、乘方及負指數；答案寫成正指數','處理數值及字母的混合式'], '負指數是倒數，並非負數。',['2012–2025 卷一 A1 均有指數題','2025 P1 Q1','2024 P2 Q2']),
+ t('expand','代數運算與分式','Algebraic operations',1,'代數',['展開括號、合併同類項','代數分式通分、約簡；列出分母限制'], '只能約去公因式，不能約去加項。',['2025 P1 Q2','2022 P1 Q3','2024 P2 Q1']),
+ t('formula','代入與公式主項','Subject of a formula',1,'代數',['正確代入括號及負數','移項、通分、取平方根，改變公式主項'], '主項出現多於一次時，先收集再抽公因式。',['2024 P1 Q2','2021 P1 Q2','2013 P1 Q2']),
+ t('factor','因式分解','Factorization',1,'代數',['抽公因式、平方差、完全平方','二次三項式及分組分解'], '完成後展開檢查；不要只分解第一部分。',['2025 P1 Q5','2024 P1 Q3','2012 P1 Q3']),
+ t('linear','一次方程與應用題','Linear equations',1,'代數',['解一次及二元聯立一次方程','把文字、速度和金錢關係寫成方程'], '先定義未知數及單位，最後回答題目所問。',['2022 P1 Q2','2021 P1 Q5','2013 P1 Q4']),
+ t('ineq','一次不等式','Linear inequalities',1,'代數',['解一次及雙重不等式，畫數線','按整數限制列出解集'], '乘除負數時必須反轉不等號。',['2025 P1 Q6','2024 P1 Q4','2024 P2 Q10']),
+ t('percent','百分數、增減與利息','Percentages & interest',1,'數與應用',['原值、現值、百分率變化；連續增減','單利、複利及折舊；用計算機核算'], '連續增減不能直接加減百分率；分清比較基準。',['2025 P1 Q7','2024 P1 Q6','2025 P2 Q10']),
+ t('ratio','比、比例、速率與比例尺','Ratio, rate & scale',1,'數與應用',['分配比例、直接比例；統一單位','速度／時間／距離與比例尺應用'], '長度、面積、體積比例分別是 k、k²、k³。',['2025 P1 Q3','2024 P1 Q5','2023 P1 Q6']),
+ t('accuracy','近似值與誤差','Approximation & errors',1,'數與應用',['有效數字、小數位及科學記數法','量度的上下限、絕對誤差及百分誤差'], '中途保留足夠位數；最後才取近似值。',['2023 P1 Q3','2020 P1 Q3','2013 P1 Q8']),
+ t('angles','角、平行線與多邊形','Angles & polygons',1,'幾何',['平行線角關係、三角形內外角','多邊形內外角及四邊形基本性質'], '寫出使用的角關係，不憑圖形外觀估角。',['2020 P1 Q8','2024 P2 Q19–21']),
+ t('similar','全等與相似','Congruence & similarity',1,'幾何',['辨認全等／相似條件及對應頂點','用比例求長度、面積及體積'], '先配對對應邊；相似不代表邊長相等。',['2025 P1 Q8','2024 P1 Q8','2023 P1 Q8']),
+ t('pyth','畢氏定理與基本三角比','Pythagoras & trigonometric ratios',1,'幾何',['直角三角形求邊長；辨認斜邊','sin、cos、tan 求角或長度；仰角俯角'], '計算機使用角度模式；先畫出直角三角形。',['2024 P1 Q7','2025 P2 Q18、20、23']),
+ t('coords','坐標、變換與極坐標','Coordinates & transformations',1,'坐標與函數',['距離、中點；平移、反射、旋轉','直角坐標與極坐標互換'], '反射和旋轉時逐一檢查符號及角所在象限。',['2025 P1 Q4','2021 P1 Q7','2025 P2 Q24']),
+ t('lines','直線方程','Equations of straight lines',1,'坐標與函數',['斜率、截距、兩點式及點斜式','平行、垂直、交點及坐標面積'], '垂直線的斜率不存在；垂直斜率乘積 −1 有使用條件。',['2022 P1 Q7','2024 P1 Q12','2024 P2 Q26']),
+ t('circleangles','圓周角基本性質','Angles in circles',1,'幾何',['圓心角與圓周角、同弓形角','半圓角、圓內接四邊形角關係'], '找清楚共同弦／弧，寫出幾何理由。',['2023 P1 Q7','2018 P1 Q8','2025 P2 Q22']),
+ t('measure','周界、面積與體積','Mensuration',1,'幾何',['弧長、扇形面積；柱、錐、球的公式','複合圖形及單位轉換'], '表面積包括外露底面；體積與表面積單位不同。',['2015 P1 Q9','2019 P1 Q9','2024 P2 Q15–16']),
+ t('stats','統計圖、平均數與中位數','Statistical charts & averages',1,'統計與概率',['讀棒形圖、幹葉圖、累積頻數圖','由頻數求平均、中位數、眾數及四分位數'], '頻數是數據個數，不是數據值；偶數個數據取中間兩值平均。',['2025 P1 Q9','2024 P1 Q9','2023 P1 Q9']),
+ t('prob','基本概率','Basic probability',1,'統計與概率',['列出等可能結果；補事件','簡單抽取、擲骰與樹形圖；分清有放回'], '不等可能的事件不能用種類數直接相除。',['2024 P1 Q9','2018 P1 Q4','2024 P2 Q28']),
+ t('quadratic','二次方程','Quadratic equations',1,'代數',['因式法、公式法；二元聯立一次與二次方程','判別式與實根數目；檢查應用题的根'], '根不一定適合實際情境；注意 ± 及分母。',['2025 P1 Q10–11','2024 P1 Q10、14','2024 P2 Q7'],'factor'),
+ t('poly','多項式、餘式與因式定理','Polynomials',2,'代數',['多項式除法、恆等式比較係數','餘式定理、因式定理及求常數'], '除以 ax+b 時，代入 −b/a；恆等式對所有 x 成立。',['2025 P1 Q10','2024 P1 Q14','2017 P1 Q14'],'factor'),
+ t('variation','變分與建立模型','Variations',1,'代數',['正、反、聯合及部分變分的方程','代入資料求常數，再求未知值'], '「部分隨…正變」和「另一部分…」不能混成單一乘積。',['2025 P1 Q11','2024 P1 Q10','2021 P1 Q10'],'formula'),
+ t('function','函數與二次函數圖像','Functions & quadratic graphs',2,'坐標與函數',['函數值、截距、對稱軸、頂點及圖像','從圖像讀解、最大／最小值與增減趨勢'], '讀圖答案與代數答案要互相檢查；頂點式內符號容易看反。',['2020 P1 Q7','2021 P1 Q10','2024 P2 Q8、14'],'quadratic'),
+ t('dispersion','離差與數據變換','Measures of dispersion',1,'統計與概率',['極差、四分位數間距、標準差；箱形圖','加入／刪除數據及平移、倍乘的影響'], '加常數改變平均數但不改變標準差；乘倍數時用絕對值。',['2025 P1 Q12','2024 P1 Q11','2023 P1 Q11'],'stats'),
+ t('loci','軌跡與坐標幾何','Loci',2,'坐標與函數',['等距軌跡、中垂線、角平分線及圓','把幾何條件轉成方程，求交點'], '軌跡可能只是一部分；留意題目限制及圖形所在區域。',['2021 P1 Q13','2020 P1 Q14','2024 P2 Q25'],'lines'),
+ t('circleeq','圓的方程','Equations of circles',2,'坐標與函數',['圓心、半徑、一般式與標準式互換','點與圓、直線與圓的關係及交點'], '一般式的係數要先配方；半徑必須為正數。',['2021 P1 Q13','2013 P1 Q14','2024 P2 Q27'],'quadratic'),
+ t('solid','立體、截錐與相似比','Solids & frustums',2,'幾何',['相似立體、截錐體積與表面積','熔鑄體積不變；斜高、垂直高度的關係'], '截錐要扣去小錐；表面積還要考慮兩個底面。',['2025 P1 Q14','2024 P1 Q13','2021 P1 Q14'],'measure'),
+ t('sequence','數列與圖形規律','Sequences & patterns',2,'數與應用',['等差、等比數列的通項與項數','以代數表達圖形／數列規律'], '首項位置及項數容易差一；用頭幾項驗證。',['2025 P2 Q13','2023 P2 Q14','2024 P2 Q36'],'linear'),
+ t('logs','指數與對數','Exponentials & logarithms',3,'代數',['對數律、底數轉換及定義域','指數／對數方程、代換及線性化圖像'], 'log(x+y) 不能拆開；所有對數真數須大於零。',['2025 P1 Q16','2024 P1 Q15','2025 P2 Q33–34'],'indices'),
+ t('sums','等差與等比級數','Arithmetic & geometric sums',3,'數與應用',['有限項和、無窮等比級數的条件','財務／增長情境、項數及求和比較'], '無窮和要求 |r|<1；先分清通項還是總和。',['2025 P1 Q17','2020 P1 Q16','2017 P1 Q16'],'sequence'),
+ t('transform','配方、最佳化與圖像變換','Completing square & graph transformations',3,'坐標與函數',['配方求極值；平移、反射及伸縮','把幾何限制與二次函數結合求最值'], 'y=f(x−a) 是向右移 a；檢查變數的可行範圍。',['2025 P1 Q18','2024 P1 Q19','2021 P1 Q19'],'function'),
+ t('lp','線性規劃','Linear programming',3,'坐標與函數',['畫可行區域及邊界，找頂點','代入目標函數；處理整數解與可行性'], '先確認區域不是空集，不能只看直線截距。',['2021 P1 Q16','2014 P1 Q18','2024 P2 Q37'],'ineq'),
+ t('trigadvanced','三角恆等式、正弦與餘弦公式','Trigonometric identities & rules',3,'幾何',['正弦公式、餘弦公式及三角形面積','三角方程、象限、恆等式與特殊角'], '正弦公式可能有兩個角；留意方程的指定範圍。',['2025 P2 Q39','2024 P2 Q39','2024 P1 Q18'],'pyth'),
+ t('trig3d','三維三角學','3D trigonometry',3,'幾何',['投影、兩直線／兩平面夾角','以直角三角形分步求高、距離及角'], '先找投影或截面；圖上的斜角未必是題目所問的角。',['2024 P1 Q18','2023 P1 Q17','2019 P1 Q18'],'trigadvanced'),
+ t('tangents','切線、弦與圓的進階性質','Tangents & circle geometry',3,'幾何',['切線半徑垂直、切線等長與弦切角','圓、相似三角形和坐標的綜合證明'], '每步列出理由；切線接觸點決定要用哪一條半徑。',['2025 P1 Q19','2020 P1 Q18','2024 P2 Q38'],'circleangles'),
+ t('centres','三角形中心','Centres of triangles',3,'幾何',['重心、內心、外心及垂心的定義','在坐標圖中用中線、垂線及角平分線求中心'], '四種中心的性質不同；勿把外心當作重心。',['2024 P1 Q17','2023 P1 Q19','2025 P2 Q41'],'lines'),
+ t('counting','排列組合與綜合概率','Permutations, combinations & probability',3,'統計與概率',['分清排列與組合；限制條件及分類','不放回抽取、條件與多步概率'], '有沒有次序？事件是否重疊？先想清楚再套公式。',['2025 P1 Q15','2024 P1 Q16','2023 P1 Q15'],'prob'),
+ t('standard','標準分與統計評議','Standard scores & statistical interpretation',3,'統計與概率',['標準分比較、數據尺度變換','判斷統計推論、圖表與抽樣的限制'], '標準分比較相對位置，不是比較原始分數。',['2016 P1 Q16','2015 P1 Q15','2024 P2 Q44–45'],'dispersion'),
+ t('number','進位制、根式與數論','Number bases, surds & number properties',3,'數與應用',['二進制／其他進位制與十進制互換','根式運算、有理化、HCF／LCM 及整數性質'], '不同進位制的位值不同；根式也不能把加法直接開根。',['2025 P2 Q31–32','2024 P2 Q31–32']),
+ t('complex','複數與二次方程根的關係','Complex numbers & relations between roots',3,'代數',['複數的四則運算及 i²=−1','根的和與積、由根構造二次方程'], '求根公式的負判別式須用 i；共軛與倒數不同。',['2023 P1 Q16','2025 P2 Q35','2024 P2 Q35'],'quadratic'),
+];
+export const stageInfo = [
+ {n:1,title:'打穩基礎',subtitle:'Level 2 起步',description:'先練 A1 常規題，再取 A2 變分、二次方程及離差的熟悉步驟；建立卷二可獨立答對的核心。'},
+ {n:2,title:'銜接達標',subtitle:'Level 3 主線',description:'承接基礎，練 A2 多步題，靠清楚算式、解釋和中間步驟累積分數。'},
+ {n:3,title:'鞏固與進階',subtitle:'Level 3+ 拓展',description:'選擇可掌握的 B 部及卷二後段題型，增加分數緩衝；目標較高的同學逐項補齊。'},
+];
+export const sources = [
+ {title:'HKEAA：數學必修部分評核框架（2027）',url:'https://www.hkeaa.edu.hk/DocLibrary/HKDSE/Subject_Information/math/2027hkdse-e-math.pdf',type:'官方',note:'卷一 65%、卷二 35%；時間及試卷結構。'},
+ {title:'EDB：高中數學課程說明',url:'https://www.edb.gov.hk/attachment/en/curriculum-development/kla/ma/curr/EN_CP_e.pdf',type:'官方',note:'課程範圍及基礎／非基礎課題；本路線階段屬教學排序。'},
+ {title:'HKEAA：水平參照成績匯報',url:'https://www.hkeaa.edu.hk/en/hkdse/assessment/the_reporting_system/srr/',type:'官方',note:'等級按表現標準釐定，並非預設固定百分比。'},
+ {title:'AfterSchool：數學 Cut off 整理',url:'https://afterschool.com.hk/blog/531-dse-%E6%95%B8%E5%AD%B8-cut-off/',type:'非官方',note:'提供歷年估算；多數年份 Level 2 缺資料。'},
+ {title:'MathConcept：數學 Cut off 整理',url:'https://mathconceptcollege.com/zh/hkdse-mathematcis-compulsory/cut-off/',type:'非官方',note:'2020 Level 3 與另外兩個來源不一致。'},
+ {title:'NoteSity：數學分界與成績整理',url:'https://www.notesity.hk/pages/blog-dse-maths-compulsory-part-cut-off-score',type:'非官方',note:'部分年份的百分比和分數分母不吻合；不用其分母作原始卷分。'},
+];
+export const cutoffs = [
+ ['2025','—','49%','AfterSchool／NoteSity'],['2024','—','51%','AfterSchool／NoteSity'],['2023','33%','54%','AfterSchool；NoteSity 的 Level 3 缺資料'],['2022','49%','約 61%','AfterSchool／NoteSity'],['2021','—','55%','AfterSchool／NoteSity'],['2020','—','49% / 61%','來源衝突：AfterSchool、NoteSity / MathConcept'],['2019','—','53%','AfterSchool／NoteSity'],['2018','—','52%*','來源的百分比與所列分數不吻合'],['2017','—','55%','AfterSchool／NoteSity'],['2016','—','59%*','來源的百分比與所列分數不吻合'],['2015','—','52%','AfterSchool／NoteSity'],['2014','—','50%*','来源的百分比與所列分數不吻合'],['2013','—','52%','AfterSchool／NoteSity'],['2012','—','58%','NoteSity'],
+];
+export const yearNotes = [
+ ['2025','P1 Q1–9 基礎；Q10–12 多項式、變分、離差；Q14 截錐；B 部有概率、對數、級數、函數及圓。'],
+ ['2024','P1 Q1–9 基礎；Q10–14 變分、離差、直線、截錐及多項式；B 部有對數、概率、幾何及函數。'],
+ ['2023','P1 A1 有誤差、百分數、比例、圓周角；A2 連接軌跡、離差、變分、多項式及立體。'],
+ ['2022','P1 A1 有代數分式、百分數、直線及全等；A2 有變分、離差、圓、立體及多項式。'],
+ ['2021','P1 A1 有極坐標與相似；A2 有變分、離差、多項式、圓及立體；B 部包含線性規劃。'],
+ ['2020','P1 A1 加入二次圖像；A2 有變分、概率、立體、多項式及圓；B 部有級數及三维三角學。'],
+ ['2019','P1 A1 有比例及立體；A2 有變分、多項式、離差與圓；B 部有計數、對數與三角形中心。'],
+ ['2018','P1 A1 有誤差、概率、圓周角及速率；A2 有離差、多項式、相似及立體；P2 使用中文原卷。'],
+ ['2017','P1 A1 有變分、誤差及坐標；A2 有離差、立體與多項式；B 部有對數、級數及概率。'],
+ ['2016','P1 A1 有極坐標及變分；A2 有圓、離差、立體及多項式；B 部有標準分與排列組合。'],
+ ['2015','P1 A1 有概率、比例及扇形；A2 有變分、多項式、統計及幾何；B 部有標準分。'],
+ ['2014','P1 A1 有誤差、離差、坐標及相似；A2 有速率圖、圓、變分及截錐；B 部有線性規劃。'],
+ ['2013','P1 A1 有極坐標、全等及誤差；A2 有統計概率、變分、多項式、立體及圓。'],
+ ['2012','P1 A1 已有指數、公式主項、因式分解及百分數；A2 延伸至變分、立體與多項式。'],
+];
+export const p2Map2025 = ['indices','factor','expand','formula','quadratic','accuracy','ineq','function','poly','percent','ratio','variation','sequence','function','measure','measure','similar','pyth','similar','pyth','pyth','circleangles','pyth','coords','loci','lines','circleeq','prob','dispersion','stats','number','number','logs','logs','complex','lp','sums','tangents','trigadvanced','trig3d','centres','counting','counting','standard','standard'];
+export const p2Map2024 = ['expand','indices','formula','accuracy','linear','ratio','quadratic','function','poly','ineq','percent','ratio','variation','function','measure','measure','similar','pyth','angles','angles','similar','circleangles','pyth','coords','loci','lines','circleeq','prob','dispersion','stats','number','number','logs','function','complex','sums','lp','tangents','trigadvanced','trig3d','centres','counting','counting','standard','standard'];

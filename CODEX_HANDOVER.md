@@ -3,7 +3,7 @@
 ## Current state
 
 The live website is https://dse-maths-roadmap.marcong2000.chatgpt.site.
-The source snapshot was deployed as Sites version 3 on 2 October 2026.
+The source snapshot was deployed as Sites version 3 on 2 October 2026. The commit ID in SOURCE_SNAPSHOT.json is provenance from the separate Sites repository. This export contains source files, not the original Git history, so that commit object is not expected to exist in GitHub.
 This transfer contains the current tracked source plus these handover documents and the simulated authentication check. It excludes dependency folders, local databases, runtime state, credentials, build output and the generated tsconfig.tsbuildinfo cache.
 
 ## Connect to Codex in the browser
@@ -70,3 +70,11 @@ The exercise upload/download feature was discussed but has not been implemented.
 Use the Sites building/hosting skills for this EXISTING site. Open the existing source, preserve its public audience and ID, run appropriate checks, push the exact source through the supported Sites workflow, save the matching version and deploy it. A GitHub commit alone does not update the live Site. Runtime values stay in Sites; do not add them to `.openai/hosting.json`.
 
 The current deployment succeeded with environment revision 1. No backend migration is required just to begin using Codex Cloud.
+
+## Recover an incomplete initial upload or blocked setup
+
+Before dependency installation, confirm that `app/`, `db/`, `scripts/`, `drizzle/`, `build/`, `components/`, `lib/`, `public/`, `vendor/` and `.openai/hosting.json` exist at the repository root. A browser upload of only top-level files is incomplete. Use the corrected GitHub main branch for a fresh cloud task; do not try to recover the original Sites commit object from this repository.
+
+The package lockfile uses the npm registry. In the cloud environment's network settings, enable internet access and choose the Package managers allowed-domain preset, or allow `registry.npmjs.org` through the workspace's approved network policy. Save and republish the environment, then start a fresh task from the corrected main branch. Existing failed task workspaces may retain the incomplete checkout. Do not remove or regenerate the lockfile to work around a proxy error.
+
+If the same registry proxy error remains after access is configured, provide its exact HTTP/error output to the environment administrator or support. Repeated offline installation cannot recover packages that are not cached. No production Supabase or SMTP credentials are needed for the local simulated tests.

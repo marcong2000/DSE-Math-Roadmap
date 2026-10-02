@@ -10,5 +10,7 @@
   ],
   "omitted_generated_files": [
     "tsconfig.tsbuildinfo"
-  ]
+  ],
+  "source_commit_is_provenance_only": true,
+  "git_history_included": false
 }

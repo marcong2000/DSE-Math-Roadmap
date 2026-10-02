@@ -1,0 +1,21 @@
+'use client';
+import { useEffect, useState, type FormEvent } from 'react';
+import Link from 'next/link';
+import { GraduationCap, LoaderCircle } from 'lucide-react';
+type Mode='login'|'signup'|'reset'|'password';
+export default function StudentLogin({enabled}:{enabled:boolean}){
+ const [mode,setMode]=useState<Mode>('login');const [email,setEmail]=useState('');const [password,setPassword]=useState('');const [repeat,setRepeat]=useState('');const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');const [error,setError]=useState('');
+ useEffect(()=>{
+  const hash=new URLSearchParams(window.location.hash.slice(1));const accessToken=hash.get('access_token');const refreshToken=hash.get('refresh_token');const recovery=hash.get('type')==='recovery';
+  if(hash.has('error_description')){const detail='驗證連結已失效，請重新申請。';window.history.replaceState(null,'','/student/login');queueMicrotask(()=>setError(detail));return;}
+  if(!accessToken||!refreshToken)return;
+  window.history.replaceState(null,'','/student/login');
+  queueMicrotask(()=>setBusy(true));
+  fetch('/api/student/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'confirm',accessToken,refreshToken})}).then(async r=>{const d=await r.json() as {error?:string};if(!r.ok)throw Error(d.error||'未能驗證連結。');if(recovery){setMode('password');setMessage('身份已驗證，請設定新密碼。');}else window.location.replace('/');}).catch(e=>setError(e.message)).finally(()=>setBusy(false));
+ },[]);
+ async function submit(event:FormEvent){event.preventDefault();setMessage('');setError('');if((mode==='signup'||mode==='password')&&password!==repeat){setError('兩次輸入的密碼不同。');return;}setBusy(true);
+  try{const r=await fetch('/api/student/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:mode,email,password})});const d=await r.json() as {error?:string;message?:string;ok?:boolean};if(!r.ok)throw Error(d.error||'請稍後重試。');setPassword('');setRepeat('');if(d.ok){if(mode==='password'){setMode('login');setMessage('密碼已更新，請用新密碼登入。');}else window.location.replace('/');}else setMessage(d.message||'請查看電郵。');}catch(e){setError(e instanceof Error?e.message:'請稍後重試。');}finally{setBusy(false);}
+ }
+ function change(next:Mode){setMode(next);setPassword('');setRepeat('');setMessage('');setError('');}
+ return <div className="login-shell"><Link href="/" className="login-brand"><GraduationCap size={26}/> DSE MATHS ROADMAP</Link><section className="login-card"><div className="eyebrow">STUDENT ACCOUNT</div><h1>{mode==='login'?'登入，繼續你的進度。':mode==='signup'?'建立你的學生帳戶。':mode==='reset'?'找回你的帳戶。':'設定新密碼。'}</h1><p>使用電郵及密碼，不需 ChatGPT 帳戶。登入後可在不同裝置繼續溫習。</p>{!enabled?<div className="note-box">學生帳戶服務尚未啟用。你仍可返回路線圖試用，或使用 ChatGPT 保存進度。</div>:<><form onSubmit={submit}>{mode!=='password'&&<label>電郵地址<input type="email" autoComplete="email" required maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} disabled={busy}/></label>}{mode!=='reset'&&<label>{mode==='password'?'新密碼':'密碼'}<input type="password" autoComplete={mode==='login'?'current-password':'new-password'} required minLength={mode==='login'?1:8} maxLength={128} value={password} onChange={e=>setPassword(e.target.value)} disabled={busy}/></label>}{(mode==='signup'||mode==='password')&&<label>再次輸入密碼<input type="password" autoComplete="new-password" required minLength={8} maxLength={128} value={repeat} onChange={e=>setRepeat(e.target.value)} disabled={busy}/></label>}{error&&<div className="error-banner" role="alert">{error}</div>}{message&&<div className="login-message" role="status">{message}</div>}<button className="login-submit" disabled={busy}>{busy?<><LoaderCircle size={17} className="spin"/> 正在處理…</>:mode==='login'?'登入':mode==='signup'?'建立帳戶':mode==='reset'?'寄送重設連結':'更新密碼'}</button></form><div className="login-links">{mode==='login'?<><button onClick={()=>change('signup')} disabled={busy}>建立帳戶</button><button onClick={()=>change('reset')} disabled={busy}>忘記密碼？</button></>:<button onClick={()=>change('login')} disabled={busy}>返回登入</button>}</div><p className="login-privacy">登入資訊由 Supabase 管理；本網站保存你的課題狀態。學生帳戶和 ChatGPT 帳戶各自保存進度。</p></>}<a className="login-chatgpt" href="/signin-with-chatgpt?return_to=%2F" target="_top">使用 ChatGPT 登入</a><Link className="login-guest" href="/">暫不登入，返回路線圖</Link></section></div>;
+}
