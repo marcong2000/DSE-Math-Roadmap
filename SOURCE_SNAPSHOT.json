@@ -1,0 +1,14 @@
+{
+  "source_commit": "415a75da707b8d924116f7fa327b0bb1805bbca4",
+  "sites_project_id": "appgprj_6abf46f55b688191bd4b84c0aba86df9",
+  "sites_version": 3,
+  "export_additions": [
+    "CODEX_HANDOVER.md",
+    "AGENTS.md",
+    "scripts/check-student-auth-simulated.mjs",
+    "SOURCE_SNAPSHOT.json"
+  ],
+  "omitted_generated_files": [
+    "tsconfig.tsbuildinfo"
+  ]
+}
